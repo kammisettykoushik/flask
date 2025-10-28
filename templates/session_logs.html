@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Session Logs</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+    th { background-color: #4CAF50; color: white; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    .active { color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Employee Session Logs</h1>
+  <p><a href="/admin">Back to Admin Panel</a> | <a href="/logout">Logout</a></p>
+  
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>IP Address</th>
+      <th>Location</th>
+      <th>Login Time</th>
+      <th>Logout Time</th>
+      <th>Duration (minutes)</th>
+    </tr>
+    {% for s in sessions %}
+    <tr>
+      <td>{{ s.username }}</td>
+      <td>{{ s.ip_address }}</td>
+      <td>{{ s.location }}</td>
+      <td>{{ s.login_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      <td>
+        {% if s.logout_time %}
+          {{ s.logout_time.strftime('%Y-%m-%d %H:%M:%S') }}
+        {% else %}
+          <span class="active">Active</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if s.session_duration %}
+          {{ (s.session_duration / 60)|round(1) }}
+        {% else %}
+          <span class="active">In Progress</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

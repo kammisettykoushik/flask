@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #eef;
+  text-align: center;
+  padding-top: 50px;
+}
+.login-box {
+  background: white;
+  padding: 20px;
+  margin: auto;
+  width: 300px;
+  border-radius: 10px;
+}
+.error {
+  color: red;
+}
