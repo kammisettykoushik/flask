@@ -37,10 +37,8 @@ def get_user_ip():
 
 def get_location_from_ip(ip_address):
     """Get location from IP address using ip-api.com (free, no key required)"""
-    if ip_address == 'Unknown' or ip_address == '127.0.0.1':
-        return "Local/Unknown"
     try:
-        response = requests.get(f'http://ip-api.com/json/{ip_address}', timeout=3)
+        response = requests.get(f'https://ipinfo.io/json/{ip_address}', timeout=3)
         data = response.json()
         if data.get('status') == 'success':
             return f"{data.get('city', 'Unknown')}, {data.get('regionName', 'Unknown')}, {data.get('country', 'Unknown')}"
@@ -87,6 +85,9 @@ def login():
         if username == "employee":
             start_screenshot_thread()
             return redirect(url_for('dashboard'))
+        if username == "admin":
+            start_screenshot_thread()
+            return redirect(url_for('admin_panel'))
     else:
         return render_template('login.html', error="Invalid credentials")
 
