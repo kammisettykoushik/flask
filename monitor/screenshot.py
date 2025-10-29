@@ -1,9 +1,14 @@
+import os
+
+# ✅ Create a fake DISPLAY environment before importing pyautogui
+if "DISPLAY" not in os.environ:
+    os.environ["DISPLAY"] = ":99"
+
+from xvfbwrapper import Xvfb
 import threading
 import time
 import pyautogui
-import os
 from datetime import datetime
-from xvfbwrapper import Xvfb
 
 def take_screenshot():
     # 1. Start the Virtual Display (This resolves the 'DISPLAY' error)
